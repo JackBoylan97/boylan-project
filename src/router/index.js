@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
+import Basket from '../views/Basket.vue'
+import ProductList from '../views/ProductList.vue'
 const routes = [
   {
     path: '/',
@@ -14,11 +15,22 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  {
+    path: '/basket',
+    name: 'Basket',
+    component: Basket
+  },
+  {
+    path: '/products',
+    name: 'Products',
+    component: ProductList
   }
+
 ]
 
 const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
+  history: createWebHistory(),
   routes
 })
 
