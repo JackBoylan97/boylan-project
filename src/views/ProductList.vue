@@ -1,7 +1,6 @@
 <template>
-  <h1>Here is the product page</h1>
   <div class="productContainer">
-  <div v-for="product in products" :key="product.id">
+  <div v-for="product in products" :key="product.id" @click="displayProduct(product)">
         <el-card :body-style="{ padding: '55px' }">
           <el-image
             :src="(`./${product.img}`)"
@@ -19,28 +18,27 @@
             >
             <br />
             
-            <el-button @click="addToBasket(product)"> Add to Basket</el-button>
           </div>
         </el-card>
   </div>
+  <div v-if="popUpBox === true">
+       <Product  :product="clickedProduct" v-on:closeBox="popUpBox = false"/>
+       </div>
   </div>
 </template>
 <script>
 import {fetchProductsDB} from "../firebase/database.js"
-import { inject } from 'vue'
-import { BasketSymbol } from '../constants/symbols'
+import Product from "../components/Product.vue"
 export default {
-    setup(){
-   const basket = inject(BasketSymbol)
-     return {
-       basket
-     }
+  components:{
+    Product
   },
   data() {
     return {
+      clickedProduct: null,
+      popUpBox: false,
       products: [],
       num: 1,
-      userCart: []
     }
   },
   mounted(){
@@ -53,9 +51,11 @@ export default {
       this.products = products;
       console.log(this.products)
     },
-    addToBasket(product){
-      this.basket.push(product)   
-      console.log(this.basket)
+    displayProduct(product){
+      console.log(product)
+      this.clickedProduct = product
+      this.popUpBox = true
+
     }
   },
 };

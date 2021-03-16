@@ -38,6 +38,10 @@ export default {
 </script>
 
 <style>
+
+#app{
+  background-color: red;
+}
 .el-container {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
