@@ -1,37 +1,35 @@
 <template>
   <div class="productContainer">
-  <div v-for="product in products" :key="product.id" @click="displayProduct(product)">
-        <el-card :body-style="{ padding: '55px' }">
-          <el-image
-            :src="(`./${product.img}`)"
-            class="image"
-            style="width: 150px; height: 150px"
-
-          ></el-image>
-          <div style="padding: 14px;">
-            <span
-              ><h2>{{ product.title }}</h2></span
-            >
-            <br />
-            <span
-              ><h3>Price: £{{ product.price }}</h3></span
-            >
-            <br />
-            
-          </div>
-        </el-card>
-  </div>
-  <div v-if="popUpBox === true">
-       <Product  :product="clickedProduct" v-on:closeBox="popUpBox = false"/>
-       </div>
+    <div
+      v-for="product in products"
+      :key="product.id"
+      @click="displayProduct(product)"
+    >
+      <Card style="width: 25rem; margin-bottom: 2em">
+        <template #header>
+          <img :src="`./${product.img}`" class="expand" alt="user header" />
+        </template>
+        <template #title>
+          <span
+            ><h2>{{ product.title }}</h2></span
+          >
+        </template>
+      </Card>
+    </div>
+    <div v-if="popUpBox === true">
+      <Product :product="clickedProduct" v-on:closeBox="popUpBox = false" />
+    </div>
   </div>
 </template>
 <script>
-import {fetchProductsDB} from "../firebase/database.js"
-import Product from "../components/Product.vue"
+import Card from "primevue/card";
+
+import { fetchProductsDB } from "../firebase/database.js";
+import Product from "../components/Product.vue";
 export default {
-  components:{
-    Product
+  components: {
+    Product,
+    Card,
   },
   data() {
     return {
@@ -39,42 +37,42 @@ export default {
       popUpBox: false,
       products: [],
       num: 1,
-    }
+    };
   },
-  mounted(){
+  mounted() {
     this.getAllProducts();
   },
   methods: {
-    async getAllProducts(){
+    async getAllProducts() {
       const products = await fetchProductsDB();
 
       this.products = products;
-      console.log(this.products)
+      console.log(this.products);
     },
-    displayProduct(product){
-      console.log(product)
-      this.clickedProduct = product
-      this.popUpBox = true
-
-    }
+    displayProduct(product) {
+      console.log(product);
+      this.clickedProduct = product;
+      this.popUpBox = true;
+    },
   },
 };
 </script>
 <style>
-.el-card {
+.p-card {
   margin-right: 10px;
   margin-bottom: 10px;
-  height: 500px;
-  width:  300px;
+  height: 300px;
+  border-radius: 25px;
+  width: 600px;
 }
 .bottom {
   margin-top: 13px;
   line-height: 12px;
 }
 
-.image {
-  width: 100%;
-  display: block;
+.p-card img {
+  width: 200px;
+  height: 200px;
 }
 
 .clearfix:before,
@@ -87,12 +85,10 @@ export default {
   clear: both;
 }
 
-.productContainer{
-  display: flex; 
+.productContainer {
+  display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
-   
 }
 </style>
-

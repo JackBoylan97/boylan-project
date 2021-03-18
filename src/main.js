@@ -1,9 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
-import './theme/index.css'
-import installElementPlus from './plugins/element'
+import PrimeVue from 'primevue/config'
+
+//styles
+import 'primevue/resources/themes/saga-blue/theme.css' //theme
+import 'primevue/resources/primevue.min.css'     //core css
+import 'primeicons/primeicons.css'      //icons
+
 
 const app = createApp(App)
-installElementPlus(app)
+app.use(PrimeVue)
 app.use(router).mount('#app')

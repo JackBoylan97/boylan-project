@@ -1,28 +1,42 @@
 <template>
-  <h1>{{ product }}</h1>
-  <el-dialog :title="product.title" v-model="dialogVisible" @close="closeBox">
-    <el-image :src="`./${product.img}`" class="image"> </el-image>
+  <Dialog header="{{product.title}}" v-model:visible.sync="dialogVisible" @hide="closeBox">
+    <img :src="`./${product.img}`" class="image"/>
 
-    <el-input-number v-model="quantity"> </el-input-number>
+    <InputNumber min="1" max="5"  buttonLayout="horizontal" v-model="quantity"> </InputNumber>
 
-    <el-button @click="addToBasket(product, quantity)">
-      Add to Basket</el-button
+    <button @click="addToBasket(product, quantity)">
+      Add to Basket</button
     >
-
-    <el-tabs @tab-click="changeTab()">
-      <el-tab-pane label="Ingredients">{{product.ingredients}}</el-tab-pane>
-      <el-tab-pane label="Reviews"></el-tab-pane>
-      <el-tab-pane label="Storage Info">{{product.storage}}</el-tab-pane>
-    </el-tabs>
-  </el-dialog>
+    <TabView>
+	<TabPanel header="Ingredients">
+    {{product.ingredients}}
+	</TabPanel>
+	<TabPanel header="Reviews">
+    Nothing added yet
+	</TabPanel>
+	<TabPanel header="Storage Info">
+    {{product.storage}}
+	</TabPanel>
+</TabView>
+  </Dialog>
 </template>
 
 <script>
+import Dialog from 'primevue/dialog'
+import InputNumber from 'primevue/inputnumber'
+import TabView from 'primevue/tabview'
+import TabPanel from 'primevue/tabpanel'
 import { inject } from "vue";
 import { BasketSymbol } from "../constants/symbols";
 export default {
   inheritAttrs: false,
   props: ["product"],
+  components:{
+    Dialog,
+    InputNumber,
+    TabView,
+    TabPanel
+  },
   setup() {
     const basket = inject(BasketSymbol);
     return {
@@ -46,11 +60,14 @@ export default {
       const productInBasket = this.basket.find((b) => b.id === product.id);
 //if no element exists, add the product to basket
       if (productInBasket == undefined) {
-        this.basket.push({ ...product, quantity });
+        var priceTotal = product.price * quantity
+        this.basket.push({ ...product, quantity, priceTotal });
       } 
 //if a product does exist then add the quantity to the product quantity      
       else {
+        debugger
         productInBasket.quantity += quantity;
+        productInBasket.priceTotal = productInBasket.price * productInBasket.quantity
       }
       console.log(this.basket);
     },
