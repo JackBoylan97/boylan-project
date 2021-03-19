@@ -2,7 +2,7 @@
   <Dialog header="{{product.title}}" v-model:visible.sync="dialogVisible" @hide="closeBox">
     <img :src="`./${product.img}`" class="image"/>
 
-    <InputNumber min="1" max="5"  buttonLayout="horizontal" v-model="quantity"> </InputNumber>
+    <InputNumber :min="1" :max="5"  buttonLayout="horizontal" v-model="quantity"> </InputNumber>
 
     <button @click="addToBasket(product, quantity)">
       Add to Basket</button

@@ -1,13 +1,17 @@
 <template>
-  <h1>Your Basket</h1>
   <DataTable :value="basket">
-    <Column field="title" header="Title">
-    </Column>
-
-    <Column header="Image" field="img">
+    <template #header>
+      <div class="table-header">
+        Your basket 
+      </div>
+    </template>
+    <Column  field="img">
       <template #body="scope">
         <img id="image" :src="`./${scope.data.img}`" />
+          <p @click="removeProduct(scope.data)"> Remove </p>
       </template>
+    </Column>
+    <Column field="title">
     </Column>
     <Column field="price" header="Price"></Column>
     <Column field="quantity" header="Quantity">
@@ -17,7 +21,7 @@
           showButtons
           incrementButtonIcon="pi pi-plus"
           decrementButtonIcon="pi pi-minus"
-          buttonLayout="horizontal"
+          buttonLayout="vertical"
           :min="1"
           :max="5"
           v-model="scope.data.quantity"
@@ -33,9 +37,10 @@
     </Column>
   </DataTable>
   <div class="totalTitle">
-  <h1>Total is {{overAllTotal}}</h1>
+  <h1>Total is £ {{overAllTotal}}</h1>
   </div>
 </template>
+
 <script>
 import { inject } from "vue";
 import { BasketSymbol } from "../constants/symbols";
@@ -51,7 +56,6 @@ export default {
   },
   data() {
     return {
-      overAllTotal: null,
     };
   },
   setup() {
@@ -68,7 +72,11 @@ export default {
       element.priceTotal = quantity * price
     }
   },
-  watch: {},
+  computed: {
+    overAllTotal(){
+     return this.basket.reduce((acc, item)=> acc + item.priceTotal,0) 
+    }
+  }
 };
 </script>
 <style>
@@ -76,4 +84,5 @@ export default {
   width: 150px;
   height: 150px;
 }
+
 </style>

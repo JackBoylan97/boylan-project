@@ -7,11 +7,15 @@
     >
       <Card style="width: 25rem; margin-bottom: 2em">
         <template #header>
-          <img :src="`./${product.img}`" class="expand" alt="user header" />
+          <br>
+          <img :src="`./${product.img}`"  id="quick-view" class="expand" alt="user header" />
+                  <Button label="Quick View" icon="" 
+        class="p-button-text p-button-plain"
+        iconPos="right" @click="displayProduct(product)"/>
         </template>
         <template #title>
           <span
-            ><h2>{{ product.title }}</h2></span
+            ><h2 class="prod-title">{{ product.title }}</h2></span
           >
         </template>
       </Card>
@@ -23,13 +27,14 @@
 </template>
 <script>
 import Card from "primevue/card";
-
+import Button from 'primevue/button'
 import { fetchProductsDB } from "../firebase/database.js";
 import Product from "../components/Product.vue";
 export default {
   components: {
     Product,
     Card,
+    Button
   },
   data() {
     return {
@@ -58,12 +63,24 @@ export default {
 };
 </script>
 <style>
+.p-button{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.prod-title{
+  font-size: 20px;
+  text-align: center;
+  margin: 1px;
+}
 .p-card {
   margin-right: 10px;
   margin-bottom: 10px;
   height: 300px;
   border-radius: 25px;
   width: 600px;
+  
 }
 .bottom {
   margin-top: 13px;
@@ -73,6 +90,10 @@ export default {
 .p-card img {
   width: 200px;
   height: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+ 
 }
 
 .clearfix:before,
