@@ -3,6 +3,9 @@ import Home from '../views/Home.vue'
 import Basket from '../views/Basket.vue'
 import ProductList from '../views/ProductList.vue'
 import Checkout from '../views/Checkout.vue'
+import Shipping from '../components/Shipping.vue'
+import Payment from '../components/Payment.vue'
+import Confirmation from '../components/Confirmation.vue'
 const routes = [
   {
     path: '/',
@@ -18,20 +21,34 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/basket',
-    name: 'Basket',
-    component: Basket
-  },
-  {
     path: '/products',
     name: 'Products',
     component: ProductList
+  },{
+    path: '/basket',
+    name: 'Basket',
+    component: Basket,
   },
   {
     path: '/checkout',
     name: 'Checkout',
-    component: Checkout
-  }
+    component: Checkout,
+    children: [{
+        path: '/checkout/shipping',
+        name: 'Shipping',
+        component: Shipping
+      },
+      {
+        path: '/checkout/payment',
+        name: 'Payment',
+        component: Payment
+      },
+      {
+        path: '/checkout/confirmation',
+        name: 'Confirmation',
+        component: Confirmation 
+    }]
+  },
 
 ]
 

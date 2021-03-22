@@ -1,4 +1,5 @@
 <template>
+<div v-if="basket.length">
   <DataTable :value="basket">
     <template #header>
       <div class="table-header">
@@ -38,7 +39,9 @@
   </DataTable>
   <div class="totalTitle">
   <h1>Total is £ {{overAllTotal}}</h1>
+  <Button label="Next" @click="this.$router.push({path: '/checkout/shipping'})" icon="pi pi-angle-right" iconPos="right"/>
   </div>
+</div>
 </template>
 
 <script>
@@ -46,13 +49,15 @@ import { inject } from "vue";
 import { BasketSymbol } from "../constants/symbols";
 import DataTable from "primevue/datatable";
 import InputNumber from "primevue/inputnumber";
-import Column from "primevue/column";
+import Column from "primevue/column"
+import Button from "primevue/button"
 
 export default {
   components: {
     DataTable,
     InputNumber,
     Column,
+    Button
   },
   data() {
     return {
@@ -70,7 +75,7 @@ export default {
       let element = this.basket.find(el => el.id === id)
       debugger
       element.priceTotal = quantity * price
-    }
+    },
   },
   computed: {
     overAllTotal(){

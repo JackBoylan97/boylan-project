@@ -16,7 +16,6 @@
 
 <script>
 import Menubar from "primevue/menubar";
-
 import { provide, ref } from "vue";
 import { BasketSymbol } from "./constants/symbols";
 export default {
