@@ -1,4 +1,7 @@
 <template>
+<div v-if="!basket.length">
+  <h1> Your basket is empty! </h1> 
+</div>
 <div v-if="basket.length">
   <DataTable :value="basket">
     <template #header>
@@ -33,13 +36,16 @@
     </Column>
     <Column header="Total">
       <template #body="scope">
-       <h1>£ {{ scope.data.priceTotal }}</h1>
+       <h1>£ {{ scope.data.priceTotal.toFixed(2) }}</h1>
       </template>
     </Column>
   </DataTable>
+  <div class="shippingPriceTitle">
+    <h1> Shipping is £ {{shippingPrice}}</h1>
+  </div>
   <div class="totalTitle">
   <h1>Total is £ {{overAllTotal}}</h1>
-  <Button label="Next" @click="this.$router.push({path: '/checkout/shipping'})" icon="pi pi-angle-right" iconPos="right"/>
+  <Button label="Proceed to checkout" @click="proceedCheckout()" icon="pi pi-angle-right" iconPos="right"/>
   </div>
 </div>
 </template>
@@ -61,6 +67,7 @@ export default {
   },
   data() {
     return {
+      shippingPrice: 3.50
     };
   },
   setup() {
@@ -75,11 +82,20 @@ export default {
       let element = this.basket.find(el => el.id === id)
       debugger
       element.priceTotal = quantity * price
+      
     },
+    proceedCheckout(){
+      this.basket.overAllTotal = this.overAllTotal      
+      this.$router.push({path: '/checkout/shipping'})
+
+    }
   },
   computed: {
     overAllTotal(){
-     return this.basket.reduce((acc, item)=> acc + item.priceTotal,0) 
+      debugger
+     var a = this.basket.reduce((acc, item)=> acc + item.priceTotal,0) 
+     var b = a + this.shippingPrice
+     return b.toFixed(2);
     }
   }
 };

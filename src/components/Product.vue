@@ -1,7 +1,7 @@
 <template>
-  <Dialog header="{{product.title}}" v-model:visible.sync="dialogVisible" @hide="closeBox">
+  <Dialog :header="product.title" v-model:visible.sync="dialogVisible" @hide="closeBox">
     <img :src="`./${product.img}`" class="image"/>
-
+    <p>£{{displayPrice}}</p>
     <InputNumber :min="1" :max="5"  buttonLayout="horizontal" v-model="quantity"> </InputNumber>
 
     <button @click="addToBasket(product, quantity)">
@@ -49,6 +49,13 @@ export default {
       dialogVisible: true,
     };
   },
+  computed: {
+    displayPrice(){
+      var a = this.product.price
+      var b = a.toFixed(2)
+      return b;
+    }
+  },
   methods: {
     closeBox() {
       this.$emit("closeBox", "false");
@@ -68,8 +75,8 @@ export default {
         debugger
         productInBasket.quantity += quantity;
         productInBasket.priceTotal = productInBasket.price * productInBasket.quantity
+        console.log(productInBasket)
       }
-      console.log(this.basket);
     },
   },
 };
@@ -77,7 +84,13 @@ export default {
 
 <style>
 .image {
-  width: 100%;
+  width: 200px;
+  height: 200px;
+  margin-left: auto;
+  margin-right: auto;
   display: block;
+}
+.p-dialog-title{
+  font-size: large;
 }
 </style>

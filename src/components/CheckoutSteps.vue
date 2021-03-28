@@ -22,9 +22,18 @@
 </template>
 
 <script>
+import {pushOrder, updateStock} from '@/firebase/database'
 import Toast from "primevue/toast";
 import Steps from "primevue/steps";
+import { inject } from "vue";
+import { BasketSymbol } from "../constants/symbols";
 export default {
+  setup() {
+    const basket = inject(BasketSymbol);
+    return {
+      basket,
+    };
+  },
   data() {
     return {
       items: [
@@ -59,17 +68,23 @@ export default {
     prevPage(event) {
       this.$router.push(this.items[event.pageIndex - 1].to);
     },
-    complete() {
+    async complete() {
+     await pushOrder({...this.formObject});
+     debugger
+     await updateStock(this.basket);
+     this.basket = []
+
       this.$toast.add({
         severity: "success",
         summary: "Order submitted",
         detail:
           "Dear, " +
-          this.formObject.firstname +
+          this.formObject.shipping.firstName +
           " " +
-          this.formObject.lastname +
-          " your order completed.",
+          this.formObject.shipping.lastName +
+          " your order is completed.",
       });
+
     },
   },
 };

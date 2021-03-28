@@ -17,6 +17,7 @@
           <span
             ><h2 class="prod-title">{{ product.title }}</h2></span
           >
+          <br>
         </template>
       </Card>
     </div>
@@ -52,64 +53,11 @@ export default {
       const products = await fetchProductsDB();
 
       this.products = products;
-      console.log(this.products);
     },
     displayProduct(product) {
-      console.log(product);
       this.clickedProduct = product;
       this.popUpBox = true;
     },
   },
 };
 </script>
-<style>
-.p-button{
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-}
-.prod-title{
-  font-size: 20px;
-  text-align: center;
-  margin: 1px;
-}
-.p-card {
-  margin-right: 10px;
-  margin-bottom: 10px;
-  height: 300px;
-  border-radius: 25px;
-  width: 600px;
-  
-}
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
-}
-
-.p-card img {
-  width: 200px;
-  height: 200px;
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
- 
-}
-
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-
-.clearfix:after {
-  clear: both;
-}
-
-.productContainer {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-}
-</style>

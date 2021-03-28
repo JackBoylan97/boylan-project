@@ -1,0 +1,85 @@
+.p-menubar{
+  height: 100px;
+  width: auto;
+  justify-content: center;
+}
+
+.p-menuitem{
+  justify-content: space-between;
+
+}
+
+.p-menuitem-text{
+  font-size: large;
+  
+}
+.webLogo{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 270px;
+  height: 15%;
+  justify-content: center;
+}
+
+#basket {
+  margin-left: auto;
+}
+
+.shipping-container{
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.p-button{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+.prod-title{
+  font-size: 20px;
+  text-align: center;
+  margin: 1px;
+}
+.p-card {
+  height: 250px;
+  border-radius: 25px;
+  width: 250px;
+  margin: 20px;
+  
+}
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.p-card img {
+  width: 150px;
+  height: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+ 
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.productContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+}
+.p-dialog{
+  width: 30%;
+}

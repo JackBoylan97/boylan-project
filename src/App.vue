@@ -1,15 +1,18 @@
 <template>
   <header>
-  <br>
+  <img :src="`./logo.png`" alt="Nature" class="webLogo">
   </header>
-          <Menubar :model="items">
+  <div style="width: 1000px; margin-left:auto; margin-right:auto;">
+          <Menubar :model="items" class="p-menubar">
             <template #start>
               <!---Put search bar in here somewhere-->
             </template>
             <template #end>
               <!--add basket here-->
+              
             </template>
           </Menubar>
+  </div>
           <br>
   <router-view />
 </template>
@@ -25,6 +28,7 @@ export default {
   },
   setup() {
     const basket = ref([]);
+
     provide(BasketSymbol, basket);
   },
   data() {
@@ -49,24 +53,4 @@ export default {
 };
 </script>
 
-<style>
-.p-menubar{
-  height: 100px;
-}
-#app{
-  background-color: red;
-}
-.p-menuitem{
-  justify-content: space-between;
 
-}
-
-.p-menuitem-text{
-  font-size: xx-large;
-  
-}
-
-#basket {
-  margin-left: auto;
-}
-</style>
