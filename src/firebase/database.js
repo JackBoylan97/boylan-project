@@ -15,20 +15,19 @@ firebase.initializeApp(firebaseConfig);
 const firebaseFirestore = firebase.firestore();
 const stockData = firebaseFirestore.collection("Sauces");
 const orderData = firebaseFirestore.collection("Orders");
+const contactData = firebaseFirestore.collection("ContactForms")
 
 export const pushOrder = async (formObject) => {
-  return orderData
-    .doc(formObject.orderId)
-    .collection("details")
-    .add(formObject);
+  return orderData.add(formObject);
 };
+export const customerForm = async (submission)=>{
+  return contactData.add(submission);
+}
 
 export const updateStock = async (basket) => {
-  console.log(basket);
   for (var i of basket) {
-    console.log(i);
+    console.log(i.quantity)
     const decrement = firebase.firestore.FieldValue.increment(-i.quantity);
-    debugger;
     const promises = []
     const query = stockData.where("id", "==", i.id);
     query.get().then(snapshots => {
@@ -39,6 +38,13 @@ export const updateStock = async (basket) => {
     })
   }
 };
+
+export const fetchOrderNum = async (number)=> {
+  const query = await orderData.where("cardholder.number","==", number).get();
+  return query.docs.map((doc)=>{
+    return doc.id;
+  })
+}
 
 export const fetchProductsDB = async () => {
   const query = await stockData.get();

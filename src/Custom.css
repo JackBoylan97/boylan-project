@@ -1,7 +1,12 @@
+#app{
+  background: #e32636;
+  margin-bottom: 0px;
+}
 .p-menubar{
   height: 100px;
   width: auto;
   justify-content: center;
+  border-radius: 25px;
 }
 
 .p-menuitem{
@@ -9,16 +14,25 @@
 
 }
 
+
 .p-menuitem-text{
   font-size: large;
   
+}
+.p-galleria{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  justify-content: center;
+  height: 50%;
 }
 .webLogo{
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 270px;
-  height: 15%;
+  width: 180px;
+  height: 5%;
   justify-content: center;
 }
 
@@ -48,6 +62,8 @@
   border-radius: 25px;
   width: 250px;
   margin: 20px;
+  border-color: black;
+  border: 50px;
   
 }
 .bottom {
@@ -81,5 +97,27 @@
   justify-content: center;
 }
 .p-dialog{
-  width: 30%;
+  justify-content: center;
+  
+  height: auto;
+  width: auto;
+}
+
+.content-container{
+  justify-content: center;
+  margin-left: 50px;
+  margin-right: 50px;
+  background-color: white;
+  border-radius: 25px;
+  height: auto;
+  width: auto;
+  padding-top: 20px;
+}
+.quantity-selector{
+  width: 4rem;
+}
+
+.p-inputnumber-input{
+  pointer-events: none;
+
 }

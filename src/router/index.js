@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
+
+import Contact from '../views/Contact.vue'
 import Home from '../views/Home.vue'
 import Basket from '../views/Basket.vue'
 import ProductList from '../views/ProductList.vue'
 import Checkout from '../views/Checkout.vue'
+
 import Shipping from '../components/Shipping.vue'
 import Payment from '../components/Payment.vue'
 import Confirmation from '../components/Confirmation.vue'
+import OrderSuccess from'../components/OrderSuccess.vue'
+
 const routes = [
   {
     path: '/',
@@ -24,7 +29,13 @@ const routes = [
     path: '/products',
     name: 'Products',
     component: ProductList
-  },{
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact
+  },
+  {
     path: '/basket',
     name: 'Basket',
     component: Basket,
@@ -47,10 +58,14 @@ const routes = [
         path: '/checkout/confirmation',
         name: 'Confirmation',
         component: Confirmation 
-    }]
+      },
+     ]
   },
-
-]
+  {
+    path: '/checkout/success',
+    name: 'Success',
+    component: OrderSuccess
+}]
 
 const router = createRouter({
   history: createWebHistory(),

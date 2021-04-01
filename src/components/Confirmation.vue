@@ -1,10 +1,9 @@
 <template>
-  <div class="stepsdemo-content">
-    <Card class="details">
+  <div class="content-container">
+    <Card id="details">
       <template #title>
         <h1>Confirmation</h1>
         
-<Divider/>
       </template>
       <template #content>
         <div class="shipping-details">
@@ -51,7 +50,6 @@
           </div>
         </div>
 
-<Divider layout="vertical"/>
 
         <div class="payment-details">
           <h3> Payment Details</h3>
@@ -114,7 +112,6 @@
 
 <script>
 import Card from "primevue/card";
-import Divider from 'primevue/divider'
 import Button from 'primevue/button'
 import { inject } from "vue";
 import { BasketSymbol } from "../constants/symbols";
@@ -123,11 +120,11 @@ export default {
     const basket = inject(BasketSymbol);
     return {
       basket,
+      confirmed: true
     };
   },
   components: {
     Card,
-    Divider,
     Button
   },
   props: {
@@ -145,7 +142,7 @@ export default {
 };
 </script>
 <style scoped>
-.details{
+#details{
   margin: auto;
   width: 60%;
   padding: 10px;

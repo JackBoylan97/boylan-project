@@ -1,15 +1,22 @@
 <template>
-  <div class="home">
-    <h1> </h1>
-  </div>
+  <div class="content-container">
+        <img
+        
+          :src="`./ChilliHome.jpg`"
+          style="width: 25%; display: block;"
+        />
+     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
-  }
-}
+  },
+  data(){
+     return {
+           }
+    },
+};
 </script>

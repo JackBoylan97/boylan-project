@@ -1,8 +1,8 @@
-<template>
-  <header>
-  <img :src="`./logo.png`" alt="Nature" class="webLogo">
+<template id="app">
+  <header id="header">
+  <img :src="`logo.png`" alt="Nature" class="webLogo">
   </header>
-  <div style="width: 1000px; margin-left:auto; margin-right:auto;">
+  <div style="margin-left:auto; margin-right:auto;">
           <Menubar :model="items" class="p-menubar">
             <template #start>
               <!---Put search bar in here somewhere-->
@@ -43,8 +43,13 @@ export default {
           to: "/products",
         },
         {
+          label: "Contact",
+          to: "/contact"
+        },
+        {
           label: "Cart",
-          icon: "",
+          icon: "pi pi-fw pi-shopping-cart",
+          styleClass: "align-right",
           to: "/basket",
         },
       ],

@@ -1,23 +1,32 @@
 <template>
+<div class="content-container">
   <div class="productContainer">
     <div
       v-for="product in products"
       :key="product.id"
-      @click="displayProduct(product)"
+      
     >
       <Card style="width: 25rem; margin-bottom: 2em">
-        <template #header>
-          <br>
-          <img :src="`./${product.img}`"  id="quick-view" class="expand" alt="user header" />
-                  <Button label="Quick View" icon="" 
-        class="p-button-text p-button-plain"
-        iconPos="right" @click="displayProduct(product)"/>
-        </template>
         <template #title>
+          <img
+            :src="`./${product.img}`"
+            id="quick-view"
+            class="expand"
+            alt="user header"
+          />
+          
+          <Button 
+            label="Quick View"
+            class="p-button-text p-button-plain"
+            iconPos="right"
+            @click="displayProduct(product)"
+          />
+        </template>
+        <template #header>
           <span
-            ><h2 class="prod-title">{{ product.title }}</h2></span
+            ><h1 class="prod-title">{{ product.title }}</h1></span
           >
-          <br>
+          <br />
         </template>
       </Card>
     </div>
@@ -25,17 +34,18 @@
       <Product :product="clickedProduct" v-on:closeBox="popUpBox = false" />
     </div>
   </div>
+  </div> 
 </template>
 <script>
 import Card from "primevue/card";
-import Button from 'primevue/button'
+import Button from "primevue/button";
 import { fetchProductsDB } from "../firebase/database.js";
 import Product from "../components/Product.vue";
 export default {
   components: {
     Product,
     Card,
-    Button
+    Button,
   },
   data() {
     return {
