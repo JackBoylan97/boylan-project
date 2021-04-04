@@ -1,18 +1,29 @@
 <template>
   <Dialog
     :dismissableMask="true"
-    :header="product.title"
     v-model:visible.sync="dialogVisible"
     @hide="closeBox"
     :responsive="true"
     :modal="true"
     :closable="true"
+    style="border-radius: 65px;"
     class="product-box"
   >
-    <img :src="`./${product.img}`" class="image" modal="true" />
-    <p>£{{ displayPrice }}</p>
+    <template #header>
+      <h1 class="product-dialog-title">{{ product.title }}</h1>
+    </template>
+    <div class="p-grid">
+      <div class="p-col">
+        <img :src="`./${product.img}`" class="image" modal="true" />
+      </div>
+      <div class="p-col">
+        <h5 style="margin-top: 0.5rem;">Price: £{{ displayPrice }}</h5>
+
+        {{ product.description }}
+      </div>
+    </div>
     <div>
-      <div v-if="product.stock > 0">
+      <div v-if="product.stock > 0" class="p-grid">
         <InputNumber
           class="quantity-selector"
           showButtons
@@ -20,13 +31,11 @@
           incrementButtonIcon="pi pi-plus"
           decrementButtonIcon="pi pi-minus"
           :min="1"
-          
-          buttonLayout="vertical"
-        >
-        </InputNumber>
-        <button @click="addToBasket(product, quantity)">
-          Add to Basket
-        </button>
+          buttonLayout="horizontal"
+        />
+        <Button label="Add to basket" class="p-button-success" style="margin-left: 4.5rem;" @click="addToBasket(product, quantity)">
+        </Button>
+  
       </div>
       <p v-else style="text-align: center; color: red;">Out of Stock</p>
     </div>
@@ -43,7 +52,7 @@
       </TabPanel>
     </TabView>
   </Dialog>
-  <Toast  />
+  <Toast />
 </template>
 
 <script>
@@ -52,6 +61,7 @@ import Dialog from "primevue/dialog";
 import InputNumber from "primevue/inputnumber";
 import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
+import Button from "primevue/button"
 import { inject } from "vue";
 import { BasketSymbol } from "../constants/symbols";
 export default {
@@ -62,6 +72,7 @@ export default {
     InputNumber,
     TabView,
     Toast,
+    Button,
     TabPanel,
   },
   setup() {
@@ -95,47 +106,53 @@ export default {
 
       if (quantity > 5) {
         quantity = 0;
-        debugger
+        debugger;
         this.$toast.add({
           severity: "error",
           summary: "Max Limit",
           life: 3000,
           detail: "You can only order a total of 5 products",
         });
-        
       }
       //if no element exists, add the product to basket
-
-     else if (productInBasket == undefined) {
-       debugger
+      else if (productInBasket == undefined) {
+        debugger;
         var priceTotal = product.price * quantity;
         this.basket.push({ ...product, quantity, priceTotal });
         this.$toast.add({
           severity: "success",
           summary: "Product Added",
           life: 2500,
-          detail: quantity+" "+product.title+" added to basket.",
+          detail: quantity + " " + product.title + " added to basket.",
         });
-        
       }
       //if a product does exist then add the quantity to the product quantity
       else if (productInBasket.quantity + quantity > 5) {
-        debugger
+        debugger;
         this.$toast.add({
           severity: "error",
           life: 3000,
           summary: "Exceeded Limit",
-          detail: "You can only order a total 5 products. You have "+productInBasket.quantity+" currently",
+          detail:
+            "You can only order a total 5 products. You have " +
+            productInBasket.quantity +
+            " currently",
         });
       } else {
         productInBasket.quantity += quantity;
         productInBasket.priceTotal =
-        productInBasket.price * productInBasket.quantity;
+          productInBasket.price * productInBasket.quantity;
         this.$toast.add({
           severity: "success",
           life: 2500,
           summary: "Product Added",
-          detail: quantity+" "+productInBasket.title+" added to basket. You have "+productInBasket.quantity+" in total",
+          detail:
+            quantity +
+            " " +
+            productInBasket.title +
+            " added to basket. You have " +
+            productInBasket.quantity +
+            " in total",
         });
       }
     },

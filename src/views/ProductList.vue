@@ -1,5 +1,9 @@
 <template>
 <div class="content-container">
+  <div class="product-list-header">
+  <h1 class="product-list-title">Hot Sauces </h1> 
+  <p class="product-list-details">There are hundreds of Chilli varieties from all around the world, each with their own heat level and flavour. Some are common varieties and some are very rare, but if they've been made into a decent sauce - you'll find it here...</p>
+  </div>
   <div class="productContainer">
     <div
       v-for="product in products"

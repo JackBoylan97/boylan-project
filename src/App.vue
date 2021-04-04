@@ -1,8 +1,7 @@
 <template id="app">
   <header id="header">
   <img :src="`logo.png`" alt="Nature" class="webLogo">
-  </header>
-  <div style="margin-left:auto; margin-right:auto;">
+   <div style="margin-left:auto; margin-right:auto;">
           <Menubar :model="items" class="p-menubar">
             <template #start>
               <!---Put search bar in here somewhere-->
@@ -13,6 +12,8 @@
             </template>
           </Menubar>
   </div>
+  </header>
+ 
           <br>
   <router-view />
 </template>

@@ -1,5 +1,6 @@
 <template>
   <div class="content-container">
+    <div class="basket-box">
     <div v-if="!basket.length">
       <h1>Your basket is empty!</h1>
     </div>
@@ -15,10 +16,11 @@
           <template #body="scope">
             <img id="image" :src="`./${scope.data.img}`" />
              <Button 
-            label="Delete"
-            style="background: #e32636"
+            label="Remove"
+            style="background: #e32636;"
             class="p-buttonset"
             iconPos="right"
+            
             icon="pi pi-trash"
             @click="removeProduct(scope.index)"
           />
@@ -44,7 +46,7 @@
               decrementButtonIcon="pi pi-minus"
               buttonLayout="vertical"
               :min="1"
-              style="width: 4rem"
+              style="width: auto;"
               :max="5"
               v-model="scope.data.quantity"
               @input="
@@ -64,18 +66,21 @@
           </template>
         </Column>
       </DataTable>
+      
       <div class="shippingPriceTitle">
-        <h3>Shipping is £ {{ shippingPrice }}</h3>
-      </div>
-      <div class="totalTitle">
-        <h1>Total is £ {{ overAllTotal }}</h1>
+        <h3>Shipping is: £ {{ shippingPrice.toFixed(2) }}</h3>
+        <h1>Total is: £ {{ overAllTotal }}</h1>
         <Button
+          class="p-button-success p-button-lg"
+          
           label="Proceed to checkout"
           @click="proceedCheckout()"
           icon="pi pi-angle-right"
           iconPos="right"
+          style="margin-right: 20px;"
         />
-      </div>
+    </div>
+    </div>
     </div>
   </div>
 </template>
@@ -97,7 +102,7 @@ export default {
   },
   data() {
     return {
-      shippingPrice: 3.5,
+      shippingPrice: 3.50,
     };
   },
   setup() {

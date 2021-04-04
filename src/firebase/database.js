@@ -21,6 +21,7 @@ export const pushOrder = async (formObject) => {
   return orderData.add(formObject);
 };
 export const customerForm = async (submission)=>{
+  debugger
   return contactData.add(submission);
 }
 
