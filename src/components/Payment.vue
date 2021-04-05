@@ -1,9 +1,9 @@
 <template>
   <div class="content-container">
-    <h3>Payment Details</h3>
-    <div class="p-fluid p-formgrid p-grid">
-      <div class="p-field p-col-12 p-md-3">
+    <div class="p-fluid p-formgrid p-grid" style="justify-content: center;">
+      <div class="p-field p-col p-md-3">
         <label for="cardholderName"> Cardholder Name </label>
+        <!--INPUTS & VALIDATIONS -->
         <InputText
           :class="{ 'p-invalid': validationErrors.name && submitted }"
           id="cardholder-name"
@@ -11,25 +11,13 @@
           class="p-inputtext-lg"
           v-model="cardholder.name"
         />
+        <br />
+        <!--Display error if validation returns true -->
         <small v-show="validationErrors.name && submitted" class="p-error"
           >Name is required
         </small>
-      </div>
-      <div class="p-field p-col-12 p-md-3">
-        <label for="cardNumber"> Card Number</label>
-        <InputMask
-          :class="{ 'p-invalid': validationErrors.number && submitted }"
-          mask="9999-9999-9999-9999"
-          class="p-inputmask p-inputtext-lg"
-          v-model="cardholder.number"
-        />
+        <br />
 
-        <small v-show="validationErrors.number && submitted" class="p-error"
-          >Number is required
-        </small>
-      </div>
-
-      <div class="p-field p-col-2">
         <label for="date">Date</label>
         <InputMask
           :class="{ 'p-invalid': validationErrors.date && submitted }"
@@ -37,13 +25,35 @@
           class="p-inputmask p-inputtext-lg"
           v-model="cardholder.date"
         />
+        <br />
 
+        <!--Display error if validation returns true -->
         <small v-show="validationErrors.date && submitted" class="p-error"
           >Date is required
         </small>
-      </div>
 
-      <div class="p-field p-col-2">
+        <!--Display error if validation returns true -->
+        <small v-show="validationErrors.dateFormat && submitted" class="p-error"
+          >-Invalid Date format(MM/YY)</small
+        >
+        <br />
+        <Button label="Back" @click="prevPage()" icon="pi pi-angle-left" />
+      </div>
+      <div class="p-field p-col p-md-3">
+        <label for="cardNumber"> Card Number</label>
+        <InputMask
+          :class="{ 'p-invalid': validationErrors.number && submitted }"
+          mask="9999-9999-9999-9999"
+          class="p-inputmask p-inputtext-lg"
+          v-model="cardholder.number"
+        />
+        <br />
+
+        <!--Display error if validation returns true -->
+        <small v-show="validationErrors.number && submitted" class="p-error"
+          >Number is required
+        </small>
+        <br />
         <label for="cvv">CVV</label>
         <InputMask
           :class="{ 'p-invalid': validationErrors.cvv && submitted }"
@@ -51,13 +61,13 @@
           v-model="cardholder.cvv"
           class="p-inputmask p-inputtext-lg"
         />
-        
+        <br />
+
+        <!--Display error if validation returns true -->
         <small v-show="validationErrors.cvv && submitted" class="p-error"
           >CVV is required
         </small>
-      </div>
-      <div class="p-grid p-nogutter p-justify-between">
-        <Button label="Back" @click="prevPage()" icon="pi pi-angle-left" />
+        <br />
         <Button
           label="Next"
           @click="nextPage()"
@@ -83,35 +93,58 @@ export default {
   methods: {
     nextPage() {
       this.submitted = true;
-      if(this.validateForm()){
-      this.$emit('next-page', {
-        formData: { cardholder: this.cardholder },
-        pageIndex: 1,
-      });
+      if (this.validateForm()) {
+        this.$emit("next-page", {
+          formData: { cardholder: this.cardholder },
+          pageIndex: 1,
+        });
       }
     },
     prevPage() {
       this.$emit("prev-page", { pageIndex: 1 });
     },
-    validateForm(){
-      if (!this.cardholder.name.trim())
-        this.validationErrors["name"] = true;
+    validateForm() {
+      //VALIDATION METHODS
+      if (!this.cardholder.name.trim()) this.validationErrors["name"] = true;
       else delete this.validationErrors["name"];
 
       if (!this.cardholder.number.trim())
         this.validationErrors["number"] = true;
       else delete this.validationErrors["number"];
 
-      if (!this.cardholder.date.trim())
-        this.validationErrors["date"] = true;
+      if (!this.cardholder.date.trim()) this.validationErrors["date"] = true;
       else delete this.validationErrors["date"];
 
-      if (!this.cardholder.cvv.trim())
-        this.validationErrors["cvv"] = true;
+      if (!this.cardholder.cvv.trim()) this.validationErrors["cvv"] = true;
       else delete this.validationErrors["cvv"];
 
       return !Object.keys(this.validationErrors).length;
-    }
+    },
+  },
+
+  computed: {
+    /*set the dateValid to same as computed method
+    If any changes are made to dataValid, then it will set it to the value
+    this.cardholder.date
+    
+    */
+
+    dateValid() {
+      return this.cardholder.date;
+    },
+  },
+
+  watch: {
+    /* Watch for the dateValid changes*/
+    dateValid(newValue) {
+      //Set regex for date validation
+      var re = /^(0[1-9]|1[012])\/\d{2}$/;
+      //if the new value isnt `re then set validation error as true`
+      //This enables dynamic validation
+      if (!re.test(newValue)) {
+        this.validationErrors["dateFormat"] = true;
+      } else delete this.validationErrors["dateFormat"];
+    },
   },
   data() {
     return {

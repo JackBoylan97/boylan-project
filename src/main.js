@@ -11,12 +11,17 @@ import 'primevue/resources/themes/saga-blue/theme.css' //theme
 import 'primeicons/primeicons.css'      //icons
 import 'primeflex/primeflex.css';
 import './App.scss'
+
+/*Customs styling set last, since CSS is cascading, this
+is necessary in order to write over set designs in UI library */
 import './Custom.css'
 // Custom Styling
 
 
 
 const app = createApp(App)
+//import Prime Vue UI Library
 app.use(PrimeVue)
+//import Toast service
 app.use(ToastService)
 app.use(router).mount('#app')

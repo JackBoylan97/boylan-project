@@ -1,118 +1,119 @@
 <template>
   <div class="content-container">
-    <Card id="details">
-      <template #title>
-        <h1>Confirmation</h1>
-        
-      </template>
-      <template #content>
-        <div class="shipping-details">
-          <h3>Shipping details</h3>
-          <div class="p-field p-col-12">
-            <label for="class">Name</label>
-            <b
-              >{{
-                formData.shipping.firstName ? formData.shipping.firstName : "-"
-              }}
-              {{
-                formData.shipping.lastName ? formData.shipping.lastName : "-"
-              }}</b
-            >
-          </div>
-          <div class="p-field p-col-12">
-            <label for="Telephone">Telephone</label>
-            <b>{{
-              formData.shipping.telephone ? formData.shipping.telephone : "-"
-            }}</b>
-          </div>
-          <div class="p-field p-col-12">
-            <label for="Email">Email</label>
-            <b>{{ formData.shipping.email ? formData.shipping.email : "-" }}</b>
-          </div>
-          <div class="p-field p-col-12">
-            <label for="class">Address</label>
-            <b>{{
-                formData.shipping.address1 ? formData.shipping.address1 : "-"
-              }}
-              {{
-                formData.shipping.address2 ? formData.shipping.address2 : "-"
-              }}</b>
-          </div>
-          <div class="p-field p-col-12">
-            <label for="City">City</label>
-            <b>{{ formData.shipping.city ? formData.shipping.city : "-" }}</b>
-          </div>
-          <div class="p-field p-col-12">
-            <label for="Postcode">Postcode</label>
-            <b>{{
-              formData.shipping.postcode ? formData.shipping.postcode : "-"
-            }}</b>
-          </div>
+    <div
+      class="p-fluid p-formgrid p-grid"
+      style="margin-right: 30px; margin-left: 30px;"
+    >
+      <div class="p-field p-col">
+        <h3>Shipping details</h3>
+        <div>
+          <!-- Display shipping details-->
+          <label for="class">Name: &nbsp;</label>
+
+          {{ formData.shipping.firstName ? formData.shipping.firstName : "-" }}
+          {{ formData.shipping.lastName ? formData.shipping.lastName : "-" }}
+        </div>
+        <div>
+          <label for="Telephone">Telephone: &nbsp;</label>
+          {{ formData.shipping.telephone ? formData.shipping.telephone : "-" }}
+        </div>
+        <div>
+          <label for="Email">Email: &nbsp;</label>
+          {{ formData.shipping.email ? formData.shipping.email : "-" }}
         </div>
 
+        <div>
+          <label for="class">Address: &nbsp;</label>
+          {{ formData.shipping.address1 ? formData.shipping.address1 : "-" }}
+          {{ formData.shipping.address2 ? formData.shipping.address2 : "-" }}
+        </div>
 
-        <div class="payment-details">
-          <h3> Payment Details</h3>
-          <div class="p-field p-col-12">
-            <label for="Name">Cardholder Name</label>
-            <b>{{
-              formData.cardholder.name ? formData.cardholder.name : "-"
-            }}</b>
-          </div>
-          <div class="p-field p-col-12">
-            <label for="Number"> Number</label>
-            <b>
-              {{
-                formData.cardholder.number ? formData.cardholder.number : "-"
-              }}
-            </b>
-          </div>
-          <div class="p-field p-col-12">
-            <label for="Date">Date</label>
-            <b>{{
-              formData.cardholder.date ? formData.cardholder.date : "-"
-            }}</b>
-          </div>
-          <div class="p-field p-col-12">
-            <label for="CVV">CVV</label>
-            <b>{{
-              formData.cardholder.cvv && formData.cardholder.cvv.length === 3
-                ? "**" + formData.cardholder.cvv[2]
-                : "-"
-            }}</b>
+        <div>
+          <label for="City">City: &nbsp;</label>
+          {{ formData.shipping.city ? formData.shipping.city : "-" }}
+        </div>
+
+        <div>
+          <label for="Postcode">Postcode: &nbsp;</label>
+          {{ formData.shipping.postcode ? formData.shipping.postcode : "-" }}
+        </div>
+      </div>
+
+      <!-- Display payment details-->
+      <div class="p-field p-col">
+        <div>
+          <h3>Payment Details</h3>
+          <label for="Name">Cardholder Name: &nbsp;</label>
+
+          {{ formData.cardholder.name ? formData.cardholder.name : "-" }}
+        </div>
+        <div>
+          <label for="Number"> Number: &nbsp;</label>
+
+          {{ formData.cardholder.number ? formData.cardholder.number : "-" }}
+        </div>
+        <div>
+          <label for="Date">Exp Date: &nbsp;</label>
+          {{ formData.cardholder.date ? formData.cardholder.date : "-" }}
+        </div>
+        <div>
+          <label for="CVV">CVV: &nbsp;</label>
+          {{
+            formData.cardholder.cvv && formData.cardholder.cvv.length === 3
+              ? "**" + formData.cardholder.cvv[2]
+              : "-"
+          }}
+        </div>
+      </div>
+    </div>
+    <div style="margin-left: 30px;">
+      <!-- Display order detais-->
+      <h3>Order Details</h3>
+      <div class="p-grid">
+        <div class="p-field p-col">
+          <b>Name</b>
+          <!-- For products in basket, diplay the title,quantity and price of each-->
+          <div v-for="product in basket" :key="product">
+            <p>{{ product.title }}</p>
           </div>
         </div>
-<h3> Order Details</h3>
-<!--<div class="OrderQuantity">
-  <label for="Quantity"> Quantity</label>
-  <b>{{}}</b>
-
-</div>
--->
-<div class="order total">
-  <label for="Total">Total</label>
-  <b>{{basket.overAllTotal}}</b>
-</div>
-      </template>
-      <template #footer>
-        <div class="p-grid p-nogutter p-justify-between">
-          <Button label="Back" @click="prevPage()" icon="pi pi-angle-left" />
-          <Button
-            label="Complete"
-            @click="complete()"
-            icon="pi pi-check"
-            iconPos="right"
-            class="p-button-success"
-          />
+        <div class="p-field p-col">
+          <b>Quantity</b>
+          <div v-for="product in basket" :key="product">
+            <p>{{ product.quantity }}</p>
+          </div>
         </div>
-      </template>
-    </Card>
+        <div class="p-field p-col">
+          <b>Price</b>
+
+          <div v-for="product in basket" :key="product">
+            <p>{{ product.price }}</p>
+          </div>
+          <label for="Shipping"> Shipping: 3.50 &nbsp;</label>
+          <br />
+          <label for="Total">Total: &nbsp;</label>
+          <!-- Display total price-->
+          <b>{{ basket.overAllTotal }}</b>
+        </div>
+      </div>
+    </div>
+    <div class="p-grid p-nogutter p-justify-between">
+      <!-- Nav buttons for checkout steps-->
+      <Button label="Back" @click="prevPage()" icon="pi pi-angle-left" />
+      <Button
+        label="Complete"
+        @click="complete()"
+        icon="pi pi-check"
+        iconPos="right"
+        class="p-button-success"
+      />
+    </div>
   </div>
 </template>
 
 <script>
-import Card from "primevue/card";
-import Button from 'primevue/button'
+//imports
+import Button from "primevue/button";
 import { inject } from "vue";
 import { BasketSymbol } from "../constants/symbols";
 export default {
@@ -120,31 +121,25 @@ export default {
     const basket = inject(BasketSymbol);
     return {
       basket,
-      confirmed: true
+      confirmed: true,
     };
   },
   components: {
-    Card,
-    Button
+    Button,
   },
+  //formData is used as the main object
   props: {
     formData: Object,
   },
   methods: {
+    //nav buttons
     prevPage() {
-      this.$emit("prev-page", { pageIndex: 3 });
+      this.$emit("prev-page", { pageIndex: 2 });
     },
     complete() {
       this.$emit("complete");
-
     },
   },
 };
 </script>
-<style scoped>
-#details{
-  margin: auto;
-  width: 60%;
-  padding: 10px;
-}
-</style>
+<style scoped></style>

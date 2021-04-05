@@ -1,7 +1,15 @@
 <template>
   <div class="content-container">
-    <h3 s>Shipping Details</h3>
+    <!-- Uses of primvue classes for grid  
+    
+    Using Prime Vue it enables a lot simpler formats for editing 
+    flex boxes
+    
+
+    -->
+
     <div class="p-fluid p-formgrid p-grid" style="justify-content: center;">
+      <!-- Setting fields and columns-->
       <div class="p-field p-col p-md-4">
         <label for="firstname">Firstname</label>
         <InputText
@@ -9,9 +17,12 @@
           id="firstname"
           type="text"
           class="p-inputtext-lg"
+          pattern="[A-Za-z]{3}"
           v-model="shipping.firstName"
         />
         <br />
+
+        <!-- validation-->
         <small v-show="validationErrors.firstName && submitted" class="p-error">
           Firstname is required.</small
         >
@@ -22,10 +33,11 @@
           type="text"
           placeholder="+44"
           :class="{ 'p-invalid': validationErrors.telephone && submitted }"
-          class="p-inputtext-lg"
+          class="p-inputtext-lg p-md-2"
           v-model="shipping.telephone"
         />
         <br />
+        <!-- validation-->
         <small v-show="validationErrors.telephone && submitted" class="p-error">
           Invalid UK mobile(11 Digits)
         </small>
@@ -33,19 +45,20 @@
         <br />
         <label for="address">Address Line 1</label>
         <InputText
-          id="address"
+          id="address1"
           rows="1"
           :class="{ 'p-invalid': validationErrors.address && submitted }"
           v-model="shipping.address"
           class="p-inputtext-lg"
         />
         <br />
+        <!-- validation-->
         <small v-show="validationErrors.address && submitted" class="p-error"
           >Address is required
         </small>
         <br />
 
-            <label for="city">City</label>
+        <label for="city">City</label>
         <InputText
           :class="{ 'p-invalid': validationErrors.city && submitted }"
           id="city"
@@ -53,11 +66,12 @@
           v-model="shipping.city"
           class="p-inputtext-lg"
         />
-    <br> 
+        <br />
+        <!-- validation-->
         <small v-show="validationErrors.city && submitted" class="p-error"
           >City is required
         </small>
-          <br> 
+        <br />
       </div>
 
       <div class="p-field p-col p-md-4">
@@ -70,6 +84,7 @@
           v-model="shipping.lastName"
         />
         <br />
+        <!-- validation-->
         <small v-show="validationErrors.firstName && submitted" class="p-error"
           >Lastname is required
         </small>
@@ -83,10 +98,11 @@
           v-model="shipping.email"
         />
         <br />
+        <!-- validation-->
         <small v-show="validationErrors.email && submitted" class="p-error"
           >Email is required
         </small>
-
+        <!-- validation-->
         <small v-show="validationErrors.emailFormat" class="p-error">
           -Invalid Email Format</small
         >
@@ -94,24 +110,25 @@
         <br />
         <label for="address">Address Line 2</label>
         <InputText
-          id="address"
+          id="address2"
           rows="1"
           v-model="address2"
           class="p-inputtext-lg"
         />
         <br />
-      <br/>
-  <label for="address">Postcode</label>
+        <br />
+        <label for="address">Postcode</label>
         <InputText
-          id="address"
+          id="postcode"
           rows="1"
-          :class="{'p-invalid': validationErrors.postcode && submitted}"
+          :class="{ 'p-invalid': validationErrors.postcode && submitted }"
           v-model="shipping.postcode"
           class="p-inputtext-lg"
         />
+        <!-- validation-->
         <small v-show="validationErrors.postcode" class="p-error">
-          Postcode is required</small>
-        
+          Postcode is required</small
+        >
       </div>
     </div>
 
@@ -149,14 +166,18 @@ export default {
     };
   },
   computed: {
+    //Return emailValid to value of this.shipping.email
     emailValid() {
       return this.shipping.email;
     },
   },
   watch: {
     emailValid(newValue) {
+      //regex used for email
       var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      //Check if email passes  `re`
       if (!re.test(newValue)) {
+        //if it fails then set validation.emailFormat to true
         this.validationErrors["emailFormat"] = true;
       } else delete this.validationErrors["emailFormat"];
     },
@@ -164,18 +185,25 @@ export default {
   methods: {
     nextPage() {
       this.submitted = true;
-      debugger
-      if(!this.address2 == ""){
+      debugger;
+      /* Since address2 is optional, check if its empty and if so
+      remove from object */
+      if (!this.address2 == "") {
         this.shipping.address2 = this.address2;
       }
-      console.log(this.shipping)
+      // If Validation is passed
       if (this.validateForm()) {
-        this.$emit("next-page", {
-          formData: { shipping: this.shipping },
-          pageIndex: 0,
-        });
+        this.$emit(
+          "next-page",
+          //send data to formData via Emit (pass data to parent method)
+          {
+            formData: { shipping: this.shipping },
+            pageIndex: 0,
+          }
+        );
       }
     },
+    //VALIDATION
     validateForm() {
       if (!this.shipping.firstName.trim())
         this.validationErrors["firstName"] = true;
@@ -204,7 +232,7 @@ export default {
       if (!this.shipping.postcode.trim())
         this.validationErrors["postcode"] = true;
       else delete this.validationErrors["postcode"];
-
+      //return length of validation erors
       return !Object.keys(this.validationErrors).length;
     },
   },

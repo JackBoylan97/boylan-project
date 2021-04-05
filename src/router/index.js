@@ -1,75 +1,69 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory } from "vue-router";
+//importing components used for routing
+import Contact from "../views/Contact.vue";
+import Home from "../views/Home.vue";
+import Basket from "../views/Basket.vue";
+import ProductList from "../views/ProductList.vue";
+import Checkout from "../views/Checkout.vue";
+import Shipping from "../components/Shipping.vue";
+import Payment from "../components/Payment.vue";
+import Confirmation from "../components/Confirmation.vue";
+import OrderSuccess from "../components/OrderSuccess.vue";
 
-import Contact from '../views/Contact.vue'
-import Home from '../views/Home.vue'
-import Basket from '../views/Basket.vue'
-import ProductList from '../views/ProductList.vue'
-import Checkout from '../views/Checkout.vue'
-
-import Shipping from '../components/Shipping.vue'
-import Payment from '../components/Payment.vue'
-import Confirmation from '../components/Confirmation.vue'
-import OrderSuccess from'../components/OrderSuccess.vue'
-
+//setting routes (setting html /pathways)
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "Home",
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: "/products",
+    name: "Products",
+    component: ProductList,
   },
   {
-    path: '/products',
-    name: 'Products',
-    component: ProductList
+    path: "/contact",
+    name: "Contact",
+    component: Contact,
   },
   {
-    path: '/contact',
-    name: 'Contact',
-    component: Contact
-  },
-  {
-    path: '/basket',
-    name: 'Basket',
+    path: "/basket",
+    name: "Basket",
     component: Basket,
   },
   {
-    path: '/checkout',
-    name: 'Checkout',
+    path: "/checkout",
+    name: "Checkout",
     component: Checkout,
-    children: [{
-        path: '/checkout/shipping',
-        name: 'Shipping',
-        component: Shipping
+    children: [
+      {
+        path: "/checkout/shipping",
+        name: "Shipping",
+        component: Shipping,
       },
       {
-        path: '/checkout/payment',
-        name: 'Payment',
-        component: Payment
+        path: "/checkout/payment",
+        name: "Payment",
+        component: Payment,
       },
       {
-        path: '/checkout/confirmation',
-        name: 'Confirmation',
-        component: Confirmation 
+        path: "/checkout/confirmation",
+        name: "Confirmation",
+        component: Confirmation,
       },
-     ]
+    ],
   },
   {
-    path: '/checkout/success',
-    name: 'Success',
-    component: OrderSuccess
-}]
+    path: "/checkout/success",
+    name: "Success",
+    component: OrderSuccess,
+  },
+];
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;

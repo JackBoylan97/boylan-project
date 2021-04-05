@@ -1,29 +1,25 @@
+/* Custom CSS*/
 #app {
   background: #e32636;
   margin-bottom: 0px;
 }
+
+/* Nav Bar */
 .p-menubar {
   height: 100px;
   width: auto;
   justify-content: center;
   border-radius: 25px;
 }
-
+/* Nav bar items */
 .p-menuitem {
   justify-content: space-between;
 }
-
+/* Nav bar text*/
 .p-menuitem-text {
-  font-size: large;
+  font-size: 2rem;
 }
-.p-galleria {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-  justify-content: center;
-  height: 50%;
-}
+/* Website Logo*/
 .webLogo {
   display: block;
   margin-left: auto;
@@ -32,28 +28,30 @@
   height: 5%;
   justify-content: center;
 }
-
+/*Basket  */
 #basket {
   margin-left: auto;
 }
-
+/* Checkout Shipping form*/
 .shipping-container {
   margin: auto;
   width: 60%;
   padding: 10px;
 }
-
+/* Button design*/
 .p-button {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
+/* Product box title */
 .prod-title {
   font-size: 20px;
   text-align: center;
   margin: 1px;
 }
+/* Product list containers for each product*/
 .p-card {
   height: 250px;
   border-radius: 25px;
@@ -62,11 +60,12 @@
   border-color: black;
   border: 50px;
 }
+/* bottom content*/
 .bottom {
   margin-top: 13px;
   line-height: 12px;
 }
-
+/* Image for each product in product list */
 .p-card img {
   width: 150px;
   height: 150px;
@@ -84,23 +83,30 @@
 .clearfix:after {
   clear: both;
 }
-
+/* Displayed product container when user clicks on product */
 .productContainer {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
 }
+/* Overall design for dialogs
+(Product container, success box)
+*/
 .p-dialog {
   justify-content: center;
   height: auto;
   width: auto;
 }
+/* Contact title styling*/
 .contact-title{
   text-align: center;
   font-size: 20vw;
 }
+/* Content container
 
+All content is displayed inside this container
+*/
 .content-container {
   justify-content: center;
   margin-left: 50px;
@@ -111,15 +117,17 @@
   width: auto;
   padding-top: 20px;
 }
+/* Quantity buttons*/
 .quantity-selector {
   width: 4rem;
 }
-
+/*Quantity number */
 .p-inputnumber-input {
   pointer-events: none;
   width: 4vw;
   min-width: 50px;
 }
+/* Home page styling */
 .titleHome {
   margin-top: 0;
   font-size: 3vw !important;
@@ -130,6 +138,8 @@
   width: 40vw;
   height: 30vw;
 }
+
+/* Product list styling */
 .product-list-header{
   padding-left: 20px;
   margin-top: -20px;  
@@ -154,6 +164,8 @@
 #addtobasket{
   width: 1px;
 }
+
+/*Basket styling */
 .basket-box{
   margin: 20px;
 }
@@ -166,4 +178,8 @@
   text-align: right;
   margin-right: 30px;
 
+}
+
+.pi-shopping-cart{
+font-size: 2rem;
 }

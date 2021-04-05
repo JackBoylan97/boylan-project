@@ -1,4 +1,5 @@
 <template>
+  <!-- CONTACT FORM -->
   <div class="content-container">
     <div class="contact-title">
       <h1>Have a question? Contact us!</h1>
@@ -7,7 +8,7 @@
       <div class="jumbotron text-left">
         <div class="container">
           <h3>Contact Form</h3>
-          <form v-on:submit="sendForm">
+          <form @submit.prevent="handleSubmit">
             <label for="fname">First Name</label>
             <input
               type="text"
@@ -68,15 +69,24 @@ export default {
     Toast,
   },
   methods: {
-    async sendForm() {
-      
+    //method to handle form submit
+    //Use of async due to customerForm method querying database
+    async handleSubmit() {
       await customerForm({ ...this.submission });
+
+      //Toast component used to inform customer of success
       this.$toast.add({
         severity: "success",
         life: 3000,
         summary: "Success",
         detail: "Your query has been sent, we shall get in touch soon!",
       });
+
+      //Reset the form values
+      this.submission.firstName = "";
+      this.submission.lastName = "";
+      this.submission.email = "";
+      this.submission.subject = "";
     },
   },
 };

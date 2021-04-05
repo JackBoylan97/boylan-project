@@ -1,4 +1,7 @@
 <template>
+  <!--Product display page-->
+
+  <!--Setting parameters for dialog-->
   <Dialog
     :dismissableMask="true"
     v-model:visible.sync="dialogVisible"
@@ -10,7 +13,9 @@
     class="product-box"
   >
     <template #header>
-      <h1 class="product-dialog-title">{{ product.title }}</h1>
+      <h1 style="text-decoration: underline;" class="product-dialog-title">
+        {{ product.title }}
+      </h1>
     </template>
     <div class="p-grid">
       <div class="p-col">
@@ -23,6 +28,14 @@
       </div>
     </div>
     <div>
+      <!--
+        VALIDATION FOR CHECKING STOCK
+        
+        If the the product.stock value is > 0
+        then display the option to add the stock to basket
+      
+      -->
+
       <div v-if="product.stock > 0" class="p-grid">
         <InputNumber
           class="quantity-selector"
@@ -31,15 +44,25 @@
           incrementButtonIcon="pi pi-plus"
           decrementButtonIcon="pi pi-minus"
           :min="1"
+          :max="5"
           buttonLayout="horizontal"
         />
-        <Button label="Add to basket" class="p-button-success" style="margin-left: 4.5rem;" @click="addToBasket(product, quantity)">
+        <Button
+          label="Add to basket"
+          class="p-button-success"
+          style="margin-left: 4.5rem;"
+          @click="addToBasket(product, quantity)"
+        >
         </Button>
-  
       </div>
+
+      <!-- Using v-else 
+      
+      -->
       <p v-else style="text-align: center; color: red;">Out of Stock</p>
     </div>
 
+    <!-- TabView component used to display product details-->
     <TabView>
       <TabPanel header="Ingredients">
         {{ product.ingredients }}
@@ -61,7 +84,7 @@ import Dialog from "primevue/dialog";
 import InputNumber from "primevue/inputnumber";
 import TabView from "primevue/tabview";
 import TabPanel from "primevue/tabpanel";
-import Button from "primevue/button"
+import Button from "primevue/button";
 import { inject } from "vue";
 import { BasketSymbol } from "../constants/symbols";
 export default {
@@ -87,9 +110,11 @@ export default {
       dialogVisible: true,
     };
   },
+
   computed: {
     displayPrice() {
       var a = this.product.price;
+      //Firestore does not display floats, so toFixed() method used to display monetary values
       var b = a.toFixed(2);
       return b;
     },
@@ -99,11 +124,15 @@ export default {
       this.$emit("closeBox", "false");
       this.quantity = 0;
     },
+
     changeTab() {},
+
     addToBasket(product, quantity) {
-      //.find(finds the element that satifises)
+      //.find(finds the element that satifises,
+      //Set productInBasket to product where id === product ID
       const productInBasket = this.basket.find((b) => b.id === product.id);
 
+      //Validation, User can only purchase 5 of each product
       if (quantity > 5) {
         quantity = 0;
         debugger;
@@ -139,9 +168,12 @@ export default {
             " currently",
         });
       } else {
+        //set overall quantity
         productInBasket.quantity += quantity;
+        //set overall price
         productInBasket.priceTotal =
           productInBasket.price * productInBasket.quantity;
+        //Inform user of success via Toast
         this.$toast.add({
           severity: "success",
           life: 2500,
@@ -171,5 +203,4 @@ export default {
 .p-dialog-title {
   font-size: large;
 }
-
 </style>

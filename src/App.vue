@@ -1,20 +1,21 @@
 <template id="app">
   <header id="header">
-  <img :src="`logo.png`" alt="Nature" class="webLogo">
-   <div style="margin-left:auto; margin-right:auto;">
-          <Menubar :model="items" class="p-menubar">
-            <template #start>
-              <!---Put search bar in here somewhere-->
-            </template>
-            <template #end>
-              <!--add basket here-->
-              
-            </template>
-          </Menubar>
-  </div>
+    <!-- Anything implemented on App.vue will be displayed across
+      all components
+  
+  Setting Navbar
+-->
+    <img :src="`logo.png`" alt="Nature" class="webLogo" />
+    <div style="margin-left:auto; margin-right:auto;">
+      <Menubar :model="items" class="p-menubar">
+        <template #start>
+          <!---Put search bar in here somewhere-->
+        </template>
+      </Menubar>
+    </div>
   </header>
- 
-          <br>
+
+  <br />
   <router-view />
 </template>
 
@@ -45,12 +46,11 @@ export default {
         },
         {
           label: "Contact",
-          to: "/contact"
+          to: "/contact",
         },
         {
           label: "Cart",
           icon: "pi pi-fw pi-shopping-cart",
-          styleClass: "align-right",
           to: "/basket",
         },
       ],
@@ -58,5 +58,3 @@ export default {
   },
 };
 </script>
-
-
