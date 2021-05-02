@@ -26,17 +26,17 @@
   </div>
   <!--Display dialog if success is true -->
   <Dialog
-    class="success-box"
-    style="width: 50vw;"
+    id="successDialog"
     v-model:visible.sync="success"
     :modal="true"
     closable="false"
     @hide="returnHome"
   >
     <template #header>
-      <p style="font-size: 3.5vw;">Your order is in the bag!</p>
+      <p class="successHeader">Your order is in the bag!</p>
     </template>
-    <p style="font-size: 1.5vw;">
+   <div class="successBody">
+    <p>
       Thank you for choosing Hot Sauce Co! We take pride in our work to deliver
       you the best hot sauce products in the UK! You can check your emails for
       an order confirmation!
@@ -44,9 +44,11 @@
     <img :src="`../Winking.jpg`" class="image" modal="true" />
     <br />
     <div style="text-align: center;">
-      <p style="font-size: 1.9vw;">Your order number is :</p>
-      <p style="font-size: 3vw;">{{ orderNum }}</p>
+      <p>Your order number is :</p>
+      <p>{{ orderNum }}</p>
+      <p> Estimated Delivery: {{deliveryDate}}</p>
     </div>
+    </div> 
     <!-- Return home-->
     <Button label="Return to home" @click="returnHome()"> </Button>
   </Dialog>
@@ -56,6 +58,7 @@
 import Button from "primevue/button";
 //Importing emailjs plugin, used for sending emails
 import emailjs from "emailjs-com";
+import {format, addBusinessDays} from 'date-fns'
 
 import Dialog from "primevue/dialog";
 //Grabbing methods from database file
@@ -67,9 +70,12 @@ import { BasketSymbol } from "../constants/symbols";
 
 export default {
   setup() {
+    var result = addBusinessDays(new Date(), 5)
+    const deliveryDate = format(new Date(result), 'eeee do LLL yyyy')
     const basket = inject(BasketSymbol);
     return {
       basket,
+      deliveryDate
     };
   },
   data() {

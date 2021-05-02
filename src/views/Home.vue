@@ -6,11 +6,11 @@
     <div class="p-grid">
       <div class="p-col" style="margin-left: 20px;">
         <h2 class="titleHome">Welcome to Hot Sauce Co!&#x1F525;</h2>
-        <p style="font-size: 1.8vw">
+        <p style="" class="homeDetails">
           Here at Hot Sauce Co we take pride in providing spicy sauce to test
           your sinuses! Our products are from all over the globe and are
           delivered straight to your doorstep. <br /><br />
-          We dont think its just about how much heat you can handle, flavour is
+          With Hot Sauce Co its not just about what heat you can handle. Flavour is
           our No1 priority here and we have a wide range of products to suit
           everyone!
         </p>

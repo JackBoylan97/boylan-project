@@ -18,14 +18,16 @@
       </h1>
     </template>
     <div class="p-grid">
-      <div class="p-col">
-        <img :src="`./${product.img}`" class="image" modal="true" />
-      </div>
-      <div class="p-col">
-        <h5 style="margin-top: 0.5rem;">Price: £{{ displayPrice }}</h5>
+    
+        <img :src="`./${product.img}`" class="image" modal="true" style="margin-top: 10px;" />
+      
+    <div>
+  <h5 style="margin-top: 0.5rem;">Price: £{{ displayPrice }}</h5>
 
         {{ product.description }}
-      </div>
+        </div>
+        <br>
+        <br>
     </div>
     <div>
       <!--

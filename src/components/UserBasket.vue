@@ -3,7 +3,9 @@
     <div class="basket-box">
       <!-- Using v-if to check if anything has been added to basket-->
       <div v-if="!basket.length">
-        <h1>Your basket is empty!</h1>
+        <h1 style="text-align: center;">Your basket is empty!</h1>
+        <br>
+        <br>
       </div>
       <!-- If a product is in basket display the table -->
       <div v-if="basket.length">

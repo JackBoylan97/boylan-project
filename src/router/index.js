@@ -8,7 +8,6 @@ import Checkout from "../views/Checkout.vue";
 import Shipping from "../components/Shipping.vue";
 import Payment from "../components/Payment.vue";
 import Confirmation from "../components/Confirmation.vue";
-import OrderSuccess from "../components/OrderSuccess.vue";
 
 //setting routes (setting html /pathways)
 const routes = [
@@ -53,12 +52,7 @@ const routes = [
         component: Confirmation,
       },
     ],
-  },
-  {
-    path: "/checkout/success",
-    name: "Success",
-    component: OrderSuccess,
-  },
+  }
 ];
 
 const router = createRouter({

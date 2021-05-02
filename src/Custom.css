@@ -1,4 +1,7 @@
 /* Custom CSS*/
+body{
+  background:  #e32636;
+}
 #app {
   background: #e32636;
   margin-bottom: 0px;
@@ -130,13 +133,16 @@ All content is displayed inside this container
 /* Home page styling */
 .titleHome {
   margin-top: 0;
-  font-size: 3vw !important;
+  font-size: 4vw;
+}
+.homeDetails{
+  font-size: 1.5vw;
 }
 .imageHome {
   border-radius: 65px;
   justify-content: right; 
-  width: 40vw;
-  height: 30vw;
+  width:min(50vw, 100%);
+  height:min(36vw,100%);
 }
 
 /* Product list styling */
@@ -147,10 +153,13 @@ All content is displayed inside this container
 
 .product-list-header .product-list-title{
   font-size: 4vw;
+  text-align: center;
+  text-decoration: underline;
   margin: 1rem;
 }
 .product-list-header .product-list-details{
-  font-size:1.5vw;
+  font-size: 1.8rem;
+  margin: 1rem;
 }
 .product-box{
   border-radius: 65px;
@@ -180,6 +189,43 @@ All content is displayed inside this container
 
 }
 
+.successHeader{
+  font-size: 3.5vw;
+}
+.successBody{
+  font-size: 1.5rem;
+}
 .pi-shopping-cart{
 font-size: 2rem;
+}
+#successDialog{
+  width: 54vw
+}
+@media only screen and (max-width: 415px){
+  #successDialog{
+    width: 81vw;
+  }
+  .titleHome{
+    font-size: 1.4rem;
+  }
+  .successHeader{
+    font-size: 1.5rem;
+  }
+  .product-list-header .product-list-title{
+  font-size: 3rem;
+  }
+  .product-list-header .product-list-details{
+    font-size: 1.4rem;
+    margin: 1rem;
+  }
+  .successBody{
+    font-size: .9rem;
+  }
+  .content-container{
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .homeDetails{
+    font-size: .7rem;
+  }
 }

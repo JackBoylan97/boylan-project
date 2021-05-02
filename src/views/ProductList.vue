@@ -21,7 +21,7 @@ each product and display info
 -->
       <div v-for="product in products" :key="product.id">
         <!--Card component used  -->
-        <Card style="width: 25rem; margin-bottom: 2em">
+        <Card style="fixed-width: 90%; margin-bottom: 2em">
           <template #title>
             <img
               :src="`./${product.img}`"

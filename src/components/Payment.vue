@@ -1,14 +1,14 @@
 <template>
   <div class="content-container">
     <div class="p-fluid p-formgrid p-grid" style="justify-content: center;">
-      <div class="p-field p-col p-md-3">
-        <label for="cardholderName"> Cardholder Name </label>
+      <div class="p-field p-col p-md-4">
+        <label for="cardholderName"> Name on card</label>
         <!--INPUTS & VALIDATIONS -->
         <InputText
           :class="{ 'p-invalid': validationErrors.name && submitted }"
           id="cardholder-name"
           type="text"
-          class="p-inputtext-lg"
+          class="p-inputtext-lg p-md-1"
           v-model="cardholder.name"
         />
         <br />
@@ -17,29 +17,6 @@
           >Name is required
         </small>
         <br />
-
-        <label for="date">Date</label>
-        <InputMask
-          :class="{ 'p-invalid': validationErrors.date && submitted }"
-          mask="99/99"
-          class="p-inputmask p-inputtext-lg"
-          v-model="cardholder.date"
-        />
-        <br />
-
-        <!--Display error if validation returns true -->
-        <small v-show="validationErrors.date && submitted" class="p-error"
-          >Date is required
-        </small>
-
-        <!--Display error if validation returns true -->
-        <small v-show="validationErrors.dateFormat && submitted" class="p-error"
-          >-Invalid Date format(MM/YY)</small
-        >
-        <br />
-        <Button label="Back" @click="prevPage()" icon="pi pi-angle-left" />
-      </div>
-      <div class="p-field p-col p-md-3">
         <label for="cardNumber"> Card Number</label>
         <InputMask
           :class="{ 'p-invalid': validationErrors.number && submitted }"
@@ -54,27 +31,61 @@
           >Number is required
         </small>
         <br />
-        <label for="cvv">CVV</label>
-        <InputMask
-          :class="{ 'p-invalid': validationErrors.cvv && submitted }"
-          mask="999"
-          v-model="cardholder.cvv"
-          class="p-inputmask p-inputtext-lg"
-        />
-        <br />
 
-        <!--Display error if validation returns true -->
-        <small v-show="validationErrors.cvv && submitted" class="p-error"
-          >CVV is required
-        </small>
-        <br />
-        <Button
-          label="Next"
-          @click="nextPage()"
-          icon="pi pi-angle-right"
-          class="btnNext"
-          iconPos="right"
-        />
+        <div class="p-fluid p-formgrid p-grid">
+          <div class="p-field p-col">
+            <label for="date">Date</label>
+            <InputMask
+              :class="{ 'p-invalid': validationErrors.date && submitted }"
+              mask="99/99"
+              class="p-inputmask p-inputtext-lg"
+              v-model="cardholder.date"
+            />
+            <br />
+            <!--Display error if validation returns true -->
+            <small v-show="validationErrors.date && submitted" class="p-error"
+              >Date is required
+            </small>
+            <!--Display error if validation returns true -->
+            <small
+              v-show="validationErrors.dateFormat && submitted"
+              class="p-error"
+              >-Invalid Date format(MM/YY)</small
+            >
+            <br />
+          </div>
+          <div class="p-field p-col">
+            <label for="cvv">CVV</label>
+            <InputMask
+              :class="{ 'p-invalid': validationErrors.cvv && submitted }"
+              mask="999"
+              v-model="cardholder.cvv"
+              class="p-inputmask p-inputtext-lg"
+            />
+            <br />
+
+            <!--Display error if validation returns true -->
+            <small v-show="validationErrors.cvv && submitted" class="p-error"
+              >CVV is required
+            </small>
+            <br />
+          </div>
+</div>
+                  <div class="p-fluid p-formgrid p-grid">
+
+          <div class="p-field p-col">
+            <Button label="Back" @click="prevPage()" icon="pi pi-angle-left" />
+          </div>
+          <div class="p-field p-col">
+            <Button
+              label="Next"
+              @click="nextPage()"
+              icon="pi pi-angle-right"
+              class="btnNext"
+              iconPos="right"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>

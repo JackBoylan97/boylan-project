@@ -10,7 +10,7 @@
 
     <div class="p-fluid p-formgrid p-grid" style="justify-content: center;">
       <!-- Setting fields and columns-->
-      <div class="p-field p-col p-md-4">
+      <div class="p-field p-col p-md-3">
         <label for="firstname">Firstname</label>
         <InputText
           :class="{ 'p-invalid': validationErrors.firstName && submitted }"
@@ -31,7 +31,7 @@
         <InputText
           id="telephone"
           type="text"
-          placeholder="+44"
+          placeholder="07"
           :class="{ 'p-invalid': validationErrors.telephone && submitted }"
           class="p-inputtext-lg p-md-2"
           v-model="shipping.telephone"
@@ -39,7 +39,7 @@
         <br />
         <!-- validation-->
         <small v-show="validationErrors.telephone && submitted" class="p-error">
-          Invalid UK mobile(11 Digits)
+          Invalid mobile(11 Digits)
         </small>
 
         <br />
@@ -74,7 +74,7 @@
         <br />
       </div>
 
-      <div class="p-field p-col p-md-4">
+      <div class="p-field p-col p-md-3">
         <label for="lastname6">Lastname</label>
         <InputText
           :class="{ 'p-invalid': validationErrors.lastName && submitted }"
@@ -123,7 +123,7 @@
           rows="1"
           :class="{ 'p-invalid': validationErrors.postcode && submitted }"
           v-model="shipping.postcode"
-          class="p-inputtext-lg"
+          class="p-inputtext-lg p-md-1"
         />
         <!-- validation-->
         <small v-show="validationErrors.postcode" class="p-error">
