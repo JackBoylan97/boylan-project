@@ -121,6 +121,7 @@ export default {
     //Using async method to await for formObject response
     async complete() {
       //Push order to order collection
+      this.formObject.orderDetails = this.basket
       await pushOrder({ ...this.formObject });
       //Set number which will be used to fetch order details
       var number = this.formObject.cardholder.number;
