@@ -7,7 +7,7 @@ import "firebase/firestore";
 
 //setting personal details for firestore access
 const firebaseConfig = {
-  apiKey: "AIzaSyAiXuwLENEocTi3S_94XJIgt4-cYZ6cRc8",
+  apiKey: "----------------------------------",
   authDomain: "jackboylanprojectfirebase.firebaseapp.com",
   projectId: "jackboylanprojectfirebase",
   storageBucket: "jackboylanprojectfirebase.appspot.com",
